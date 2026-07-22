@@ -1,6 +1,6 @@
 # aria51
 
-Accessibility testing that catches what axe-core misses — keyboard navigation, focus management, screen reader compatibility, and WCAG 2.2 checks that require real browser interaction.
+Accessibility testing for keyboard navigation, focus management, screen reader compatibility, and WCAG 2.2 checks that require real browser interaction.
 
 <p align="center">
   <img src="assets/hero.gif" alt="aria51 scanning Hacker News and finding accessibility violations" width="700">
@@ -12,11 +12,11 @@ Accessibility testing that catches what axe-core misses — keyboard navigation,
 npx aria51 https://your-site.com
 ```
 
-No config, no API key, no setup.
+Runs instantly with zero config, no API key, and no setup.
 
 ### Focused Audits
 
-Test specific accessibility dimensions that static analysis tools can't reach:
+Test specific accessibility dimensions through real browser interaction:
 
 ```bash
 # Keyboard: tab order, focus traps, skip links, focus indicators
@@ -39,7 +39,7 @@ npx aria51 https://your-site.com --audit-screen-reader
 
 ### Full WCAG Compliance Audit
 
-Run a complete multi-page audit with one command — no API key needed:
+Run a complete multi-page audit with one command, no API key needed:
 
 ```bash
 npx aria51 https://your-site.com --full-audit
@@ -48,7 +48,9 @@ npx aria51 https://your-site.com --full-audit --max-pages 20
 
 Discovers pages via sitemap and link crawling, scans every page with axe-core, runs keyboard/structure/screen-reader audits on key pages, and generates a prioritized remediation plan.
 
-### What It Finds That Other Tools Miss
+### What aria51 Catches
+
+Combining axe-core with focused browser audits surfaces issues across real interaction paths:
 
 | Site | axe-core alone | + aria51 focused audits |
 |------|---------------|------------------------|
@@ -59,7 +61,7 @@ Discovers pages via sitemap and link crawling, scans every page with axe-core, r
 
 ## MCP Server
 
-aria51 ships as an MCP server so AI coding assistants can test accessibility directly. The workflow becomes: **scan a URL, see violations, fix the code, re-scan to verify** — all within the assistant's loop.
+aria51 ships as an MCP server so AI coding assistants can test accessibility directly. The workflow becomes: **scan a URL, see violations, fix the code, re-scan to verify**, all within the assistant's loop.
 
 ### Claude Code
 
@@ -149,10 +151,10 @@ npx aria51 https://your-site.com --audit-keyboard --deep
 
 ## Documentation
 
-- [Introduction](docs/introduction.md) — Architecture and how the pieces fit together
-- [CI Integration](docs/ci.md) — CI/CD setup and configuration
-- [WCAG 2.2 Reference](docs/WCAG-2.2.md) — All 86 success criteria
-- [Effect Architecture](docs/effect-service-breakdown.md) — Core scanning engine internals
+- [Introduction](docs/introduction.md): Architecture and how the pieces fit together
+- [CI Integration](docs/ci.md): CI/CD setup and configuration
+- [WCAG 2.2 Reference](docs/WCAG-2.2.md): All 86 success criteria
+- [Effect Architecture](docs/effect-service-breakdown.md): Core scanning engine internals
 
 ## Development
 
@@ -175,11 +177,11 @@ pnpm --filter @aria51/core test
 
 ## Built With
 
-- [axe-core](https://github.com/dequelabs/axe-core) — Automated WCAG violation detection
-- [Playwright](https://playwright.dev) — Browser automation for keyboard and screen reader testing
-- [Stagehand](https://github.com/browserbase/stagehand) — AI-powered browser interaction for `--deep` mode
-- [Effect](https://effect.website) — Composable error handling and resource management
-- [element-source](https://github.com/aidenybai/element-source) — Maps DOM nodes to framework component source locations
+- [axe-core](https://github.com/dequelabs/axe-core): Automated WCAG violation detection
+- [Playwright](https://playwright.dev): Browser automation for keyboard and screen reader testing
+- [Stagehand](https://github.com/browserbase/stagehand): AI-powered browser interaction for `--deep` mode
+- [Effect](https://effect.website): Composable error handling and resource management
+- [element-source](https://github.com/aidenybai/element-source): Maps DOM nodes to framework component source locations
 
 ## License
 
