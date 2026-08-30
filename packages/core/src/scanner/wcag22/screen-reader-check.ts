@@ -10,6 +10,7 @@
 import type { Page } from 'playwright';
 import type { SupplementalTestResult, SupplementalIssue } from '../../types.js';
 import { logger } from '../../utils/logger.js';
+import { getAccessibilityTree } from '../../utils/accessibility-tree.js';
 
 /** Snapshot node as returned by Playwright */
 interface SnapshotNode {
@@ -53,7 +54,8 @@ export async function checkScreenReaderNavigation(page: Page): Promise<Supplemen
         analyzeLandmarks(landmarks, issues);
 
         // 3. Heading check (1.3.1, 2.4.6)
-        const snapshot = await page.accessibility.snapshot();
+        // page.accessibility was removed in Playwright 1.62; read it over CDP.
+        const snapshot = await getAccessibilityTree(page);
         if (snapshot) {
             const headings = extractHeadings(snapshot as SnapshotNode);
             analyzeHeadings(headings, issues);

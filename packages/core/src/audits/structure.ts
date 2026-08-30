@@ -5,6 +5,7 @@
  */
 import { chromium } from 'playwright';
 import type { StructureAuditResult, StructureAuditOptions, LandmarkInfo, HeadingInfo, FormInputInfo, AuditIssue } from './types.js';
+import { getAccessibilityTree } from '../utils/accessibility-tree.js';
 
 export async function auditStructure(
     url: string,
@@ -20,7 +21,8 @@ export async function auditStructure(
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
 
-        const tree = await page.accessibility.snapshot();
+        // page.accessibility was removed in Playwright 1.62; read it over CDP.
+        const tree = await getAccessibilityTree(page);
         const title = await page.title();
         const issues: AuditIssue[] = [];
 

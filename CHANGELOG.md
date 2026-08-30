@@ -5,6 +5,29 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] — 2026-08-30
+
+### Fixed
+
+- **The structure audit and the screen-reader check threw on any fresh install.**
+  Playwright removed `page.accessibility` in 1.62, and this package's dependency
+  range is a caret on 1.56, so `npm install` resolved to a Playwright without
+  that API and both paths failed with `Cannot read properties of undefined
+  (reading 'snapshot')`. Existing checkouts with an older lockfile never saw it.
+
+  The accessibility tree is now read through CDP `Accessibility.getFullAXTree`,
+  which is stable across versions, and reshaped into the tree Playwright used to
+  return. Output was verified identical to the old API on Playwright 1.56 across
+  pages with and without headings, and verified working on 1.62.
+
+  Affected `auditStructure`, the WCAG screen-reader check, the MCP
+  `get_accessibility_tree` tool, and both ai-auditor browser paths.
+
+### Added
+
+- `getAccessibilityTree(page)` and the `AccessibilityNode` type are exported from
+  `@aria51/core` for callers that used `page.accessibility.snapshot()` directly.
+
 ## [0.2.0] — 2026-08-30
 
 ### Fixed

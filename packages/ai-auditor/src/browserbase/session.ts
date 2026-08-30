@@ -7,6 +7,7 @@
 import type { Stagehand } from '@browserbasehq/stagehand';
 import type { BrowserbaseClient, BrowserbaseSession } from './client.js';
 import type { WcagAuditResult, AuditFinding } from '../types.js';
+import { getAccessibilityTree } from '@aria51/core';
 
 /**
  * Callbacks for streaming audit progress
@@ -93,7 +94,7 @@ export async function createLiveAuditSession(
                 callbacks.onProgress?.('Analyzing page structure');
 
                 // Get accessibility tree
-                const a11yTree = await page.accessibility.snapshot();
+                const a11yTree = await getAccessibilityTree(page);
 
                 callbacks.onProgress?.('Running accessibility checks');
 

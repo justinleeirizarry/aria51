@@ -15,6 +15,7 @@ import {
     loadEnvConfig,
     hasEnvConfig,
     getComponentBundlePath,
+    getAccessibilityTree,
 } from "@aria51/core";
 
 // Configure logger to use stderr to avoid corrupting JSON-RPC on stdout
@@ -170,7 +171,7 @@ server.registerTool(
             const browserInstance = await browsers[browser as keyof typeof browsers].launch({ headless: true });
             const page = await browserInstance.newPage();
             await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-            const snapshot = await page.accessibility.snapshot();
+            const snapshot = await getAccessibilityTree(page);
             await browserInstance.close();
 
             return {

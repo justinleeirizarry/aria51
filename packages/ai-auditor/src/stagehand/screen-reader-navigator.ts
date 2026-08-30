@@ -20,7 +20,7 @@ import type {
     ScreenReaderIssueType,
     WcagCriterionInfo,
 } from "../types.js";
-import { logger, getCriterionById } from "@aria51/core";
+import { logger, getCriterionById, getAccessibilityTree } from "@aria51/core";
 
 /** WCAG criteria relevant to screen reader navigation */
 const SCREEN_READER_WCAG_MAP: Record<ScreenReaderIssueType, string[]> = {
@@ -139,7 +139,7 @@ export class ScreenReaderNavigator {
 
         // 2. Get accessibility snapshot (for headings and interactive elements)
         logger.debug('Taking accessibility snapshot...');
-        const snapshot = await this.page.accessibility.snapshot();
+        const snapshot = await getAccessibilityTree(this.page);
         if (!snapshot) {
             throw new Error("Could not get accessibility snapshot");
         }

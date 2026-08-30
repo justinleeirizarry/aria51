@@ -282,6 +282,14 @@ export {
 } from './audits/index.js';
 
 // =============================================================================
+// Accessibility Tree
+// =============================================================================
+
+// Replaces page.accessibility.snapshot(), removed in Playwright 1.62.
+export { getAccessibilityTree } from './utils/accessibility-tree.js';
+export type { AccessibilityNode } from './utils/accessibility-tree.js';
+
+// =============================================================================
 // Component Attribution
 // =============================================================================
 
