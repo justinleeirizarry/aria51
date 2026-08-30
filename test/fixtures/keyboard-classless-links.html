@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Keyboard regression fixture — class-less and shared-class links</title>
+    <style>
+        /* Real focus indicators so 2.4.7 does not dominate the results. */
+        a:focus, button:focus { outline: 2px solid #0055ff; }
+        .hidden-group { display: none; }
+    </style>
+</head>
+<body>
+    <!--
+      Regression fixture for the non-unique-selector bug.
+
+      Group A links carry no id and no class, so a selector built from
+      `tag#id.class` collapses every one of them to the bare string "a".
+      Group B links all share one class, exactly as CSS-modules and utility-class
+      frameworks emit, collapsing to "a.nav-link".
+
+      Under the old identity scheme this page appeared to contain two elements
+      and to trap focus inside group B. It contains twelve tabbable elements and
+      traps nothing.
+
+      TABBABLE COUNT MUST STAY AT 12 — the tests assert on it.
+    -->
+
+    <!-- Group A: six links, no id, no class -->
+    <nav>
+        <a href="#a1">Alpha</a>
+        <a href="#a2">Bravo</a>
+        <a href="#a3">Charlie</a>
+        <a href="#a4">Delta</a>
+        <a href="#a5">Echo</a>
+        <a href="#a6">Foxtrot</a>
+    </nav>
+
+    <!-- Group B: six links, all sharing one class -->
+    <main>
+        <a class="nav-link" href="#b1">Golf</a>
+        <a class="nav-link" href="#b2">Hotel</a>
+        <a class="nav-link" href="#b3">India</a>
+        <a class="nav-link" href="#b4">Juliett</a>
+        <a class="nav-link" href="#b5">Kilo</a>
+        <a class="nav-link" href="#b6">Lima</a>
+    </main>
+
+    <!-- Decoys: focusable-looking but NOT tabbable. None may be counted. -->
+    <footer>
+        <a href="#skip" tabindex="-1">Programmatically focusable only</a>
+        <button disabled>Disabled button</button>
+        <div class="hidden-group">
+            <a href="#hidden">Inside a display:none container</a>
+        </div>
+    </footer>
+</body>
+</html>

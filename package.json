@@ -8,6 +8,7 @@
         "build": "pnpm --filter @aria51/core build && pnpm --filter @aria51/ai-auditor build && pnpm --filter aria51 --filter @aria51/mcp build",
         "dev": "pnpm -r --parallel dev",
         "test": "vitest run",
+        "test:integration": "vitest run --config vitest.integration.config.ts",
         "test:watch": "vitest",
         "test:ui": "vitest --ui",
         "test:coverage": "vitest run --coverage",

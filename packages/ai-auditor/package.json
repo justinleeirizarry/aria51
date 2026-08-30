@@ -1,6 +1,6 @@
 {
     "name": "@aria51/ai-auditor",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "description": "AI-powered accessibility auditing using Stagehand and Browserbase",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

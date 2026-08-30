@@ -45,3 +45,10 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      # Browser-driven tests. These are excluded from `pnpm test` because they
+      # are slow, which previously meant the Chromium install above was never
+      # used and no test ever exercised a real page. Defects in the tab walk are
+      # only observable here.
+      - name: Integration tests
+        run: pnpm test:integration
